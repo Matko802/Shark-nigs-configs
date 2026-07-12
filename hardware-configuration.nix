@@ -35,6 +35,12 @@
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
+  fileSystems."/mnt/ssd" =
+    { device = "/dev/disk/by-uuid/5985a5cc-6808-46fa-ac5a-f321e2838c8f";
+      fsType = "ext4";
+      options = [ "defaults" "noatime" "nofail 0 2" ];
+    };
+
 
   swapDevices =
     [ { device = "/dev/disk/by-uuid/c3c7bc3f-f27d-48ea-8203-d29435a62170"; }

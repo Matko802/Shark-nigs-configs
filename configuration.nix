@@ -10,45 +10,18 @@
       ./hardware-configuration.nix
       inputs.nixcord.nixosModules.nixcord
     ];
-    # ... config
+  # Discord
  programs.nixcord = {
     enable = true;
     user = "matko"; # Needed for system-level config
-
-    # Choose your Discord mod client (enable at most one of these two)
-    # discord.vencord.enable = true;      # Standard Vencord
-    discord.equicord.enable = true;   # Equicord (has more plugins)
-
-    # Or these
-    # vesktop.enable = true;
-    # dorion.enable = true;
-    # legcord.enable = true;
-
-    # Theming
-    quickCss = "/* css goes here */";
-    config = {
-      useQuickCss = true;
-      themeLinks = [
-        "https://raw.githubusercontent.com/link/to/some/theme.css"
-      ];
-      frameless = true;
-
-      plugins = {
-        hideMedia.enable = true;
-        ignoreActivities = {
-          enable = true;
-          ignorePlaying = true;
-        };
-      };
-    };
+    discord.equicord.enable = true;
   };
   # Gaming
   hardware.graphics = {
       enable = true;
       enable32Bit = true;
     };
-  hardware.amdgpu.initrd.enable = true;
-  #Fish
+  # Fish
   programs.fish.enable = true;
   users.users.matko = {
     shell = pkgs.fish;
@@ -90,7 +63,7 @@
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
+  services.xserver.enable = false;
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
@@ -141,7 +114,7 @@
   };
 
   # Install firefox.
-  programs.firefox.enable = true;
+  programs.firefox.enable = false;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
