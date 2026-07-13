@@ -26,6 +26,7 @@
      enable = true;
      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+     extraPackages = with pkgs; [ kdePackages.breeze ];
    };
      hardware.graphics = {
       enable = true;
@@ -164,9 +165,6 @@
   starship
   wine
   ];
-  environment.sessionVariables = {
-  QT_QPA_PLATFORMTHEME = "qt5ct"; # Or "qt6ct"
-};
   programs.kdeconnect.enable = true;
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     konsole
