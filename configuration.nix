@@ -147,6 +147,7 @@
       equibop
       godot
       ollama-rocm
+      litellm
     ];
   };
 
