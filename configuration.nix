@@ -146,6 +146,7 @@
       mpvScripts.visualizer
       equibop
       godot
+      ollama-rocm
     ];
   };
 
