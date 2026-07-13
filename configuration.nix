@@ -8,19 +8,30 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      inputs.nixcord.nixosModules.nixcord
+      ./Machine/KDE/plasma-fix.nix
+      ./Machine/Helium/helium-browser.nix
+      ./Machine/fastfetch/fastfetch-config.nix
+      ./Machine/fish/fish-config.nix
+      ./Machine/Starship/starship-config.nix
+      ./Machine/kitty/kitty-config.nix
+      inputs.gsr-ui-nix.nixosModules.default
     ];
-  # Discord
- programs.nixcord = {
-    enable = true;
-    user = "matko"; # Needed for system-level config
-    discord.equicord.enable = true;
-  };
+    programs.gpu-screen-recorder = {
+      package = inputs.gsr-ui-nix.packages.${pkgs.stdenv.hostPlatform.system}.gpu-screen-recorder;
+      enable = true;
+      ui.enable = true;
+    };
   # Gaming
-  hardware.graphics = {
+     programs.steam = {
+     enable = true;
+     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+   };
+     hardware.graphics = {
       enable = true;
       enable32Bit = true;
     };
+  services.flatpak.enable = true;
   # Fish
   programs.fish.enable = true;
   users.users.matko = {
@@ -29,9 +40,8 @@
   # Bootloader.
   boot.loader.limine.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
   # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "fishy"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -66,7 +76,20 @@
   services.xserver.enable = false;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm = {
+  enable = true;
+  theme = "breeze";
+
+  # This sets your resolution and refresh rate via the absolute path to xrandr
+  setupScript = ''
+    ${pkgs.xrandr}/bin/xrandr --output DP-2 --mode 1920x1080 --rate 144
+  '';
+
+  settings = {
+    General = { Numlock = "on"; };
+    Theme = { CursorTheme = "breeze_cursors"; };
+  };
+};
   services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
@@ -106,10 +129,21 @@
     description = "Matko";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
+      prismlauncher
+      inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
       kdePackages.kate
       git
-      fastfetch
-    #  thunderbird
+      protonplus
+      mpv
+      vscode
+      opencode-desktop
+      yt-dlp
+      kitty
+      fuse
+      cava
+      pear-desktop
+      mpvScripts.visualizer
+      equibop
     ];
   };
 
@@ -122,9 +156,18 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+  appimage-run
+  gearlever
+  steamcmd
+  fastfetch
+  starship
+  ];
+  programs.kdeconnect.enable = true;
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    konsole
+  ];
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   # Some programs need SUID wrappers, can be configured further or are

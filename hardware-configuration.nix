@@ -35,10 +35,11 @@
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
+
   fileSystems."/mnt/ssd" =
     { device = "/dev/disk/by-uuid/5985a5cc-6808-46fa-ac5a-f321e2838c8f";
       fsType = "ext4";
-      options = [ "defaults" "noatime" "nofail 0 2" ];
+      options = [ "defaults" "noatime" "nofail" ];
     };
 
 
