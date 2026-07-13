@@ -144,6 +144,7 @@
       pear-desktop
       mpvScripts.visualizer
       equibop
+      godot
     ];
   };
 
