@@ -152,6 +152,7 @@
       litellm
       python314Packages.kokoro
       kdePackages.filelight
+      pip
     ];
   };
 
