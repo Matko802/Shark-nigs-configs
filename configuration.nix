@@ -169,7 +169,6 @@
       uv
       wayvr
       xrizer
-      mcpelauncher-ui-qt
     ];
   };
   # Install firefox.
@@ -191,6 +190,7 @@
     protontricks
     proton-vpn
     lutris
+    mcpelauncher-ui-qt
   ];
   programs.kdeconnect.enable = true;
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
