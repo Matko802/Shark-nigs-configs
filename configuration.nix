@@ -16,6 +16,8 @@
       ./Machine/kitty/kitty-config.nix
       inputs.gsr-ui-nix.nixosModules.default
     ];
+    users.extraUsers.matko.extraGroups = [ "vboxusers" ];
+    virtualisation.virtualbox.host.enable = true;
     programs.gpu-screen-recorder = {
       package = inputs.gsr-ui-nix.packages.${pkgs.stdenv.hostPlatform.system}.gpu-screen-recorder;
       enable = true;
