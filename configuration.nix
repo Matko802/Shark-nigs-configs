@@ -169,6 +169,7 @@
       uv
       wayvr
       xrizer
+      mcpelauncher-ui-qt
     ];
   };
   # Install firefox.
