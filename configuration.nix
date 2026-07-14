@@ -16,6 +16,12 @@
       ./Machine/kitty/kitty-config.nix
       inputs.gsr-ui-nix.nixosModules.default
     ];
+    services.avahi = {
+  enable = true;
+  nssmdns4 = true;      # Allows resolving .local hostnames
+  openFirewall = true;  # Opens UDP 5353 for local network discovery
+};
+
     users.extraUsers.matko.extraGroups = [ "vboxusers" ];
     virtualisation.virtualbox.host.enable = true;
     programs.gpu-screen-recorder = {
@@ -154,6 +160,8 @@
       kdePackages.filelight
       uv
       wivrn
+      wayvr
+      xrizer
     ];
   };
 
