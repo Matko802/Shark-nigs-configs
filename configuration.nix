@@ -150,7 +150,6 @@
       godot
       ollama-rocm
       litellm
-      virtualbox
     ];
   };
 
