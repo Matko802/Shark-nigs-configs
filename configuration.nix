@@ -83,7 +83,7 @@
 
   # This sets your resolution and refresh rate via the absolute path to xrandr
   setupScript = ''
-    ${pkgs.xrandr}/bin/xrandr --output DP-2 --mode 1920x1080 --rate 144
+    ${pkgs.xrandr}/bin/xrandr --output DP-2 --mode 1920x1080 --rate 165
   '';
 
   settings = {
