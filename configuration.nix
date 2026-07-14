@@ -21,6 +21,14 @@
     openFirewall = true;
     autoStart = true;
   };
+  programs.gamemode.enable = true;
+  programs.nix-ld.enable = true;
+  programs.gamescope.enable = true;
+  hardware.graphics = {
+  enable = true;
+  enable32Bit = true;
+  };
+
     services.avahi = {
       enable = true;
       nssmdns4 = true;
@@ -45,10 +53,7 @@
      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
      extraPackages = with pkgs; [ kdePackages.breeze ];
    };
-     hardware.graphics = {
-      enable = true;
-      enable32Bit = true;
-    };
+
   services.flatpak.enable = true;
   # Fish
   programs.fish.enable = true;
@@ -97,12 +102,6 @@
   services.displayManager.sddm = {
   enable = true;
   theme = "breeze";
-
-  # This sets your resolution and refresh rate via the absolute path to xrandr
-  setupScript = ''
-    ${pkgs.xrandr}/bin/xrandr --output DP-2 --mode 1920x1080 --rate 165
-  '';
-
   settings = {
     General = { Numlock = "on"; };
     Theme = { CursorTheme = "breeze_cursors"; };
@@ -172,7 +171,6 @@
       xrizer
     ];
   };
-
   # Install firefox.
   programs.firefox.enable = false;
 
@@ -182,12 +180,16 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  appimage-run
-  gearlever
-  steamcmd
-  fastfetch
-  starship
-  wine
+    appimage-run
+    gearlever
+    steamcmd
+    fastfetch
+    starship
+    wine
+    winetricks
+    protontricks
+    proton-vpn
+    lutris
   ];
   programs.kdeconnect.enable = true;
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
