@@ -151,7 +151,7 @@
       ollama-rocm
       litellm
       python314Packages.kokoro
-      filelight
+      kdePackages.filelight
     ];
   };
 
