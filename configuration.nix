@@ -169,6 +169,7 @@
       uv
       wayvr
       xrizer
+      vscode
     ];
   };
   # Install firefox.
