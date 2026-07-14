@@ -16,11 +16,21 @@
       ./Machine/kitty/kitty-config.nix
       inputs.gsr-ui-nix.nixosModules.default
     ];
+    services.wivrn = {
+    enable = true;
+    openFirewall = true;
+    defaultRuntime = true;
+    autoStart = true;
+  };
     services.avahi = {
-  enable = true;
-  nssmdns4 = true;      # Allows resolving .local hostnames
-  openFirewall = true;  # Opens UDP 5353 for local network discovery
-};
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+      publish = {
+        enable = true;
+        userServices = true; # Allows non-root user apps like WiVRn to broadcast mDNS services
+      };
+    };
 
     users.extraUsers.matko.extraGroups = [ "vboxusers" ];
     virtualisation.virtualbox.host.enable = true;
@@ -159,7 +169,6 @@
       python314Packages.kokoro
       kdePackages.filelight
       uv
-      wivrn
       wayvr
       xrizer
     ];
