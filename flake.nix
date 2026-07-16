@@ -5,12 +5,15 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    helium.url = "github:oxcl/nix-flake-helium-browser";
     gsr-ui-nix = {
       url = "github:rPlakama/gsr-ui-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+  helium = {
+    url = "github:schembriaiden/helium-browser-nix-flake";
+    inputs.nixpkgs.follows = "nixpkgs";
   };
+};
 
   outputs = { nix-cachyos-kernel, self, nixpkgs, helium, ... }@inputs: {
     nixosConfigurations.matko = nixpkgs.lib.nixosSystem {
@@ -19,8 +22,6 @@
 
       modules = [
         ./configuration.nix
-        helium.nixosModules.default
-        ./Machine/Helium/helium-browser.nix
 
         (
           { pkgs, ... }:

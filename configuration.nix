@@ -9,7 +9,6 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./Machine/KDE/plasma-fix.nix
-      ./Machine/Helium/helium-browser.nix
       ./Machine/fastfetch/fastfetch-config.nix
       ./Machine/fish/fish-config.nix
       ./Machine/Starship/starship-config.nix
@@ -24,10 +23,8 @@
   programs.gamemode.enable = true;
   programs.nix-ld.enable = true;
   programs.gamescope.enable = true;
-  hardware.graphics = {
-  enable = true;
-  enable32Bit = true;
-  };
+  hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
 
     services.avahi = {
       enable = true;
@@ -97,16 +94,9 @@
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = false;
-
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm = {
-  enable = true;
-  theme = "breeze";
-  settings = {
-    General = { Numlock = "on"; };
-    Theme = { CursorTheme = "breeze_cursors"; };
-  };
-};
+  
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
@@ -148,6 +138,7 @@
     packages = with pkgs; [
       prismlauncher
       inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+      inputs.helium.packages.${system}.default
       kdePackages.kate
       git
       protonplus
@@ -170,6 +161,10 @@
       wayvr
       xrizer
       vscode
+      alcom
+      unityhub
+      mcpelauncher-ui-qt
+      chromium
     ];
   };
   # Install firefox.
