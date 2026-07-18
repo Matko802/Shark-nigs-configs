@@ -20,6 +20,7 @@
     openFirewall = true;
     autoStart = true;
   };
+  hardware.enableRedistributableFirmware = true;
   programs.gamemode.enable = true;
   programs.nix-ld.enable = true;
   programs.gamescope.enable = true;
@@ -191,6 +192,7 @@
     steamcmd
     fastfetch
     starship
+    bottles
     wine
     winetricks
     protontricks
@@ -209,6 +211,20 @@
     nerd-fonts.jetbrains-mono
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nixpkgs.overlays = [
+  (final: prev: {
+    python3Packages = prev.python3Packages.override {
+      overrides = python-final: python-prev: {
+        patool = python-prev.patool.overridePythonAttrs (old: {
+          doCheck = false; # Skips the broken tests
+        });
+      };
+    };
+  })
+];
+environment.variables = {
+  "NIXOS_OZONE_WL" = "1";
+};
   
 
   services.udev.extraRules = ''
