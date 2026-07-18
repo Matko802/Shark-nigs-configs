@@ -13,9 +13,12 @@
       ./Machine/fish/fish-config.nix
       ./Machine/Starship/starship-config.nix
       ./Machine/kitty/kitty-config.nix
-      ./Machine/KDE-Colours/kdetheme.nix
       inputs.gsr-ui-nix.nixosModules.default
     ];
+  xdg.portal = {
+  enable = true;
+  extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
+  };
     services.wivrn = {
     enable = true;
     openFirewall = true;
@@ -143,6 +146,9 @@
       kdePackages.kate
       git
       github-desktop
+      xdg-utils
+      libsecret
+      kdePackages.xdg-desktop-portal-kde
       protonplus
       mpv
       vscode
@@ -211,6 +217,7 @@
     nerd-fonts.jetbrains-mono
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  
 
   services.udev.extraRules = ''
   # Grant WebHID access to MCHOSE Mix 87-III
