@@ -139,7 +139,6 @@
     packages = with pkgs; [
       prismlauncher
       inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-      inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default
       kdePackages.kate
       git
       protonplus
@@ -178,8 +177,6 @@
       fetch
     ];
   };
-  # Install firefox.
-  programs.firefox.enable = false;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -222,9 +219,6 @@
     };
   })
 ];
-environment.variables = {
-  "NIXOS_OZONE_WL" = "1";
-};
   
 
   services.udev.extraRules = ''
