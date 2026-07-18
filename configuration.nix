@@ -15,10 +15,6 @@
       ./Machine/kitty/kitty-config.nix
       inputs.gsr-ui-nix.nixosModules.default
     ];
-  xdg.portal = {
-  enable = true;
-  extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
-  };
     services.wivrn = {
     enable = true;
     openFirewall = true;
@@ -145,10 +141,6 @@
       inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default
       kdePackages.kate
       git
-      github-desktop
-      xdg-utils
-      libsecret
-      kdePackages.xdg-desktop-portal-kde
       protonplus
       mpv
       vscode
