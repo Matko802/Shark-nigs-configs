@@ -13,6 +13,7 @@
       ./Machine/fish/fish-config.nix
       ./Machine/Starship/starship-config.nix
       ./Machine/kitty/kitty-config.nix
+      ./Machine/KDE-Colours/kdetheme.nix
       inputs.gsr-ui-nix.nixosModules.default
     ];
     services.wivrn = {
@@ -138,9 +139,10 @@
     packages = with pkgs; [
       prismlauncher
       inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-      inputs.helium.packages.${system}.default
+      inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default
       kdePackages.kate
       git
+      github-desktop
       protonplus
       mpv
       vscode
@@ -148,6 +150,7 @@
       yt-dlp
       kitty
       fuse
+      cavasik
       cava
       pear-desktop
       mpvScripts.visualizer
@@ -157,14 +160,23 @@
       litellm
       python314Packages.kokoro
       kdePackages.filelight
+      kdePackages.kdenlive
       uv
+      ffmpeg-full
       wayvr
       xrizer
       vscode
       alcom
       unityhub
       mcpelauncher-ui-qt
-      chromium
+      obsidian
+      krita
+      gimp
+      inkscape
+      blender
+      audacity
+      lmms
+      fetch
     ];
   };
   # Install firefox.
@@ -187,6 +199,9 @@
     proton-vpn
     lutris
     mcpelauncher-ui-qt
+    unzip
+    kdePackages.kcalc
+    kdePackages.partitionmanager
   ];
   programs.kdeconnect.enable = true;
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
@@ -196,6 +211,11 @@
     nerd-fonts.jetbrains-mono
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  services.udev.extraRules = ''
+  # Grant WebHID access to MCHOSE Mix 87-III
+  KERNEL=="hidraw*", ATTRS{idVendor}=="3837", ATTRS{idProduct}=="300d", MODE="0666", TAG+="uaccess"
+'';
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
