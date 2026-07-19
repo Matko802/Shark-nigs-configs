@@ -175,6 +175,7 @@
       audacity
       lmms
       fetch
+      onlyoffice-desktopeditors
     ];
   };
 
@@ -189,7 +190,6 @@
     steamcmd
     fastfetch
     starship
-    bottles
     wine
     winetricks
     protontricks
@@ -208,19 +208,6 @@
     nerd-fonts.jetbrains-mono
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nixpkgs.overlays = [
-  (final: prev: {
-    python3Packages = prev.python3Packages.override {
-      overrides = python-final: python-prev: {
-        patool = python-prev.patool.overridePythonAttrs (old: {
-          doCheck = false; # Skips the broken tests
-        });
-      };
-    };
-  })
-];
-  
-
   services.udev.extraRules = ''
   # Grant WebHID access to MCHOSE Mix 87-III
   KERNEL=="hidraw*", ATTRS{idVendor}=="3837", ATTRS{idProduct}=="300d", MODE="0666", TAG+="uaccess"
