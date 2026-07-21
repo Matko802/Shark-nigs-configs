@@ -37,7 +37,6 @@
       };
     };
 
-    users.extraUsers.matko.extraGroups = [ "vboxusers" ];
     virtualisation.virtualbox.host.enable = true;
     programs.gpu-screen-recorder = {
       package = inputs.gsr-ui-nix.packages.${pkgs.stdenv.hostPlatform.system}.gpu-screen-recorder;
@@ -55,14 +54,12 @@
   services.flatpak.enable = true;
   # Fish
   programs.fish.enable = true;
-  users.users.matko = {
-    shell = pkgs.fish;
-  };
   # Bootloader.
   boot.loader.limine.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   # Use latest kernel.
   # boot.kernelPackages = pkgs.linuxPackages_latest;
+  
 
   networking.hostName = "fishy"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -135,7 +132,8 @@
   users.users."matko" = {
     isNormalUser = true;
     description = "Matko";
-    extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.fish;
+    extraGroups = [ "networkmanager" "wheel" "vboxusers" ];
     packages = with pkgs; [
       prismlauncher
       inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -176,6 +174,7 @@
       lmms
       fetch
       onlyoffice-desktopeditors
+      itch
     ];
   };
 
@@ -190,7 +189,7 @@
     steamcmd
     fastfetch
     starship
-    wine
+    wineWow64Packages.waylandFull
     winetricks
     protontricks
     proton-vpn
@@ -199,6 +198,12 @@
     unzip
     kdePackages.kcalc
     kdePackages.partitionmanager
+    umu-launcher
+    faugus-launcher
+    setxkbmap
+    mangohud
+    mangojuice
+    adwaita-icon-theme
   ];
   programs.kdeconnect.enable = true;
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
