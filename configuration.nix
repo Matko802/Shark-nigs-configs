@@ -133,7 +133,7 @@
     isNormalUser = true;
     description = "Matko";
     shell = pkgs.fish;
-    extraGroups = [ "networkmanager" "wheel" "vboxusers" ];
+    extraGroups = [ "networkmanager" "wheel" "vboxusers" "i2c" ];
     packages = with pkgs; [
       prismlauncher
       inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -213,7 +213,6 @@
       "slk"
     ];
   })
-  openrgb-with-all-plugins
   ];
   programs.kdeconnect.enable = true;
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
@@ -227,6 +226,12 @@
   # Grant WebHID access to MCHOSE Mix 87-III
   KERNEL=="hidraw*", ATTRS{idVendor}=="3837", ATTRS{idProduct}=="300d", MODE="0666", TAG+="uaccess"
 '';
+  hardware.i2c.enable = true;
+  boot.kernelModules = [ "i2c-dev" "i2c-piix4" ];
+  services.hardware.openrgb = {
+    enable = true;
+    package = pkgs.openrgb-with-all-plugins;
+  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
