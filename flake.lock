@@ -32,23 +32,6 @@
         "type": "github"
       }
     },
-    "compotsor": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1784717330,
-        "narHash": "sha256-3orcAbHvn8JXhnU4dSFv8GXg+CXgHhY0IjSOSLItqEc=",
-        "path": "/mnt/ssd/My-Files/Projects/CompotSOR",
-        "type": "path"
-      },
-      "original": {
-        "path": "/mnt/ssd/My-Files/Projects/CompotSOR",
-        "type": "path"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -251,7 +234,6 @@
     },
     "root": {
       "inputs": {
-        "compotsor": "compotsor",
         "gsr-ui-nix": "gsr-ui-nix",
         "helium-flake": "helium-flake",
         "nix-cachyos-kernel": "nix-cachyos-kernel",

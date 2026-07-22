@@ -213,6 +213,7 @@
       "slk"
     ];
   })
+  openrgb-with-all-plugins
   ];
   programs.kdeconnect.enable = true;
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
