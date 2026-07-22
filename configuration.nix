@@ -184,6 +184,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    cargo
+    rustc
+    gcc
     appimage-run
     gearlever
     steamcmd
@@ -204,6 +207,12 @@
     mangohud
     mangojuice
     adwaita-icon-theme
+    (kdePackages.spectacle.override {
+    tesseractLanguages = [
+      "eng"
+      "slk"
+    ];
+  })
   ];
   programs.kdeconnect.enable = true;
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
