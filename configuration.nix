@@ -13,6 +13,7 @@
       ./Machine/fish/fish-config.nix
       ./Machine/Starship/starship-config.nix
       ./Machine/kitty/kitty-config.nix
+      ./Machine/mpv/mpv-config.nix
       inputs.gsr-ui-nix.nixosModules.default
     ];
     services.wivrn = {
