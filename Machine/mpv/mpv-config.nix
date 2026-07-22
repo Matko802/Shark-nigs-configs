@@ -2,6 +2,6 @@
 
 {
   systemd.user.tmpfiles.rules = [
-    "L+ %h/.config/mpv - - - - ${./config}"
+    "L+ %h/.config/mpv - - - - ${toString ./config}"
   ];
 }

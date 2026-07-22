@@ -2,6 +2,6 @@
 
 {
   systemd.user.tmpfiles.rules = [
-    "L+ %h/.config/kitty - - - - ${./config}"
+    "L+ %h/.config/kitty - - - - ${toString ./config}"
   ];
 }

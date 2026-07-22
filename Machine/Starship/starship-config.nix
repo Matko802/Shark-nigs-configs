@@ -2,6 +2,6 @@
 
 {
 systemd.user.tmpfiles.rules = [
-    "L+ %h/.config/starship.toml - - - - ${./starship.toml}"
+    "L+ %h/.config/starship.toml - - - - ${toString ./starship.toml}"
   ];
 }
