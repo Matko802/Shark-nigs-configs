@@ -176,6 +176,7 @@
       fetch
       onlyoffice-desktopeditors
       itch
+
     ];
   };
 
@@ -218,6 +219,7 @@
   programs.kdeconnect.enable = true;
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     konsole
+    drkonqi
   ];
 
   fonts = {
@@ -238,6 +240,11 @@
     enable = true;
     package = pkgs.openrgb-with-all-plugins;
   };
+
+  programs.appimage = {
+  enable = true;
+  binfmt = true;
+};
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
