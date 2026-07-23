@@ -17,6 +17,11 @@
       ./Machine/KDE-Colours/kdetheme.nix
       inputs.gsr-ui-nix.nixosModules.default
     ];
+    services.ollama = {
+    enable = true;
+    package = pkgs.ollama-rocm; # Force ROCm build instead of CPU
+    rocmOverrideGfx = "10.3.0";  # Tricks ROCm into accepting RX 6600 (RDNA2)
+  };
     services.wivrn = {
     enable = true;
     openFirewall = true;
@@ -154,7 +159,6 @@
       mpvScripts.visualizer
       equibop
       godot
-      ollama-rocm
       litellm
       python314Packages.kokoro
       kdePackages.filelight
@@ -219,7 +223,6 @@
   programs.kdeconnect.enable = true;
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     konsole
-    drkonqi
   ];
 
   fonts = {
@@ -245,6 +248,7 @@
   enable = true;
   binfmt = true;
 };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
