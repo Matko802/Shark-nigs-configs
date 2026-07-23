@@ -158,7 +158,6 @@
       litellm
       python314Packages.kokoro
       kdePackages.filelight
-      kdePackages.kdenlive
       uv
       ffmpeg-full
       wayvr
@@ -220,9 +219,14 @@
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     konsole
   ];
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-  ];
+
+  fonts = {
+    fontDir.enable = true;
+    packages = with pkgs; [
+      nerd-fonts.jetbrains-mono
+    ];
+  };
+  
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   services.udev.extraRules = ''
   # Grant WebHID access to MCHOSE Mix 87-III
